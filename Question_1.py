@@ -5,8 +5,8 @@ class Node:
         self.next = None
         self.index_in_array = -1  # keep track of where the node is in the array
 
-# Fast singly linked list with O(1) insert, remove, and get
-class FastSLL:
+# Singly linked list with O(1) insert, remove, and get
+class SLL:
     def __init__(self):
         self.head = None
         self.nodes_array = []  # array to quickly find nodes by index
@@ -66,7 +66,7 @@ class FastSLL:
             last_node.index_in_array = i
         self.nodes_array.pop()
 
-# Helper to print linked list
+# Print linked list
 def print_linked_list(sll):
     curr = sll.head
     print("Linked list:", end=" ")
@@ -75,21 +75,20 @@ def print_linked_list(sll):
         curr = curr.next
     print("None")
 
-# Helper to print array view
+# Print array view
 def print_array(sll):
     print("Array view: ", [node.value for node in sll.nodes_array])
 
 # Main program
 def main():
-    my_list = FastSLL()
+    my_list = SLL()
 
     while True:
         print("\nMenu:")
         print("1 - Insert")
         print("2 - Get")
         print("3 - Remove")
-        print("4 - Show list")
-        print("5 - Exit")
+        print("4 - Exit")
         choice = input("Choose: ")
 
         if choice == "1":
@@ -99,6 +98,8 @@ def main():
                 idx = int(input("Insert at index: "))
                 my_list.insert_at(idx, val)
                 print(f"Inserted '{val}' at index {idx}")
+                print_array(my_list)
+                print_linked_list(my_list)
             except Exception as e:
                 print("Error:", e)
 
@@ -121,14 +122,12 @@ def main():
                 val = my_list.get(idx)
                 my_list.remove_at(idx)
                 print(f"Removed '{val}'")
+                print_array(my_list)
+                print_linked_list(my_list)
             except Exception as e:
                 print("Error:", e)
 
         elif choice == "4":
-            print_array(my_list)
-            print_linked_list(my_list)
-
-        elif choice == "5":
             print("Goodbye!")
             break
 
